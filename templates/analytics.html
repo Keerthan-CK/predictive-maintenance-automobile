@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="http://127.0.0.1:5000/static/images/favicon.png" type="image/x-icon">
+  <title>Predictive Maintanace of Automobiles</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="http://127.0.0.1:5000/static/css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="http://127.0.0.1:5000/static/css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="http://127.0.0.1:5000/static/css/responsive.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body{
+      background-color: #1c1c1c;
+    }
+      #Box{
+          padding: 25px;
+          background-color: white;
+          height: auto;
+          margin-top: 150px;
+          color: white !important;
+      }
+      .wrapper {
+display: table;
+margin: 0 auto;
+padding: 35px 40px 40px;
+margin: 20px auto;
+}
+
+.gauge {
+font-family: Arial, Helvetica, sans-serif;
+background: #e7e7e7;
+box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.09), 0 0 35px 5px rgba(255, 255, 255, 0.29);
+width: 200px;
+height: 100px;
+border-radius: 100px 100px 0 0;
+position: relative;
+overflow: hidden;
+}
+.gauge.min-scaled {
+transform: scale(0.5);
+}
+
+.gauge-center {
+content: attr(data-before);
+color: #fff;
+width: 60%;
+height: 60%;
+background: #15222e;
+border-radius: 100px 100px 0 0;
+position: absolute;
+box-shadow: 0 -13px 15px -10px rgba(0, 0, 0, 0.28);
+right: 21%;
+bottom: 0;
+}
+.gauge-center #counter0,.gauge-center #counter1,  .gauge-center #counter2, .gauge-center #counter3, .gauge-center #counter4, .gauge-center #counter5,.gauge-center #counter6{
+color: #fff;
+font-size: 1.5em;
+width: 100%;
+padding: 20px 0 0 0;
+text-align: center;
+float: left;
+-webkit-font-smoothing: antialiased;
+}
+
+.needle {
+width: 78px;
+height: 7px;
+background: #15222e;
+border-bottom-left-radius: 100%;
+border-bottom-right-radius: 5px;
+border-top-left-radius: 100%;
+border-top-right-radius: 5px;
+position: absolute;
+bottom: 4px;
+left: 20px;
+transform-origin: 100% 4px;
+box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.38);
+transition: transform 0.8s;
+transition-timing-function: cubic-bezier(0.65, 1.95, 0.03, 0.32);
+}
+
+.slice-colors .st {
+position: absolute;
+bottom: 0;
+width: 200px;
+height: 200px;
+}
+.slice-colors .st.slice-item:nth-child(1) {
+background-color: #1eaa59;
+left: -100px;
+transform-origin: bottom right;
+transform: rotate(-33deg);
+}
+.slice-colors .st.slice-item:nth-child(2) {
+background-color: #f1c40f;
+left: 54px;
+transform: rotate(-33deg);
+}
+.slice-colors .st.slice-item:nth-child(3) {
+background-color: #e84c3d;
+transform: rotate(33deg);
+transform-origin: bottom left;
+left: 100px;
+}
+
+.s-box {
+margin: 0 auto;
+width: 200px;
+text-align: center;
+}
+
+.row{
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  margin-bottom: 50px;
+  padding: 50px;
+  background-color: white;
+}
+
+  </style>
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+
+    <header class="header_section">
+      <div class="header_top">
+        <div class="container-fluid">
+          <div class="contact_link-container">
+            <a href="" class="contact_link1">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Acharya Institute of Technology , Bangalore
+              </span>
+            </a>
+            <a href="" class="contact_link2">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
+                Call : +91 72040-36555
+              </span>
+            </a>
+            <a href="" class="contact_link3">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span>
+                https://www.acharya.ac.in/
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="header_bottom">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="/">
+              <span>
+                Predictive Maintanace of Automobiles
+              </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""></span>
+            </button>
+
+            <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+              <ul class="navbar-nav  ">
+                <li class="nav-item ">
+                  <a class="nav-link" href="/predict">Predict</a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="/analytics">Analytics</a>
+                </li>
+                <li class="nav-item ">
+                  <a class="nav-link" href="/">Logout</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- contact section -->
+
+  <section class="contact_section layout_padding">
+    <div class="container">
+      {% if result %}
+        <center><h3>{{result}}</h3></center>
+        <hr><br>
+      {% endif %}
+      <div class="heading_container heading_center">
+        <h2>
+          Analytics
+        </h2>
+      </div>
+
+              <div class="contact_form-container">
+
+
+                <div class="row" >
+                  <div class="col-md-4">
+                    <div class="container" id="weighmachine">
+                      <div class="wrapper">
+                        <div class="gauge">
+                          <div class="slice-colors">
+                            <div class="st slice-item"></div>
+                            <div class="st slice-item"></div>
+                            <div class="st slice-item"></div>
+                          </div>
+                          <div id="arrow1" class="needle"></div>
+                          <div class="gauge-center"><div id="counter0">0</div></div>
+                        </div>
+                      </div>                  
+                      </div>
+                      <div class="heading_container heading_center" style="color: black;">
+                        <h3>
+                          Engine Temperature
+                        </h3>
+                      </div>
+                  </div>
+  
+                  <div class="col-md-8">
+                    <div style="width: 100%;">
+                      <canvas id="myChart0" style="overflow-x: scroll;"></canvas>
+                  </div>  
+                    </div>
+                  </div>
+
+
+                <div class="row" >
+                <div class="col-md-4">
+                  <div class="container" id="weighmachine">
+                    <div class="wrapper">
+                      <div class="gauge">
+                        <div class="slice-colors">
+                          <div class="st slice-item"></div>
+                          <div class="st slice-item"></div>
+                          <div class="st slice-item"></div>
+                        </div>
+                        <div id="arrow1" class="needle"></div>
+                        <div class="gauge-center"><div id="counter1">0</div></div>
+                      </div>
+                    </div>                  
+                    </div>
+                    <div class="heading_container heading_center" style="color: black;">
+                      <h3>
+                        Volatge
+                      </h3>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                  <div style="width: 100%;">
+                    <canvas id="myChart1" style="overflow-x: scroll;"></canvas>
+                </div>  
+                  </div>
+                </div>
+
+
+                <div class="row" >
+                  <div class="col-md-4">
+                    <div class="container" id="weighmachine">
+                      <div class="wrapper">
+                        <div class="gauge">
+                          <div class="slice-colors">
+                            <div class="st slice-item"></div>
+                            <div class="st slice-item"></div>
+                            <div class="st slice-item"></div>
+                          </div>
+                          <div id="arrow2" class="needle"></div>
+                          <div class="gauge-center"><div id="counter2">0</div></div>
+                        </div>
+                      </div>                  
+                      </div>
+                      <div class="heading_container heading_center" style="color: black;">
+                        <h3>
+                          Current
+                        </h3>
+                      </div>
+                  </div>
+  
+                  <div class="col-md-8">
+                    <div style="width: 100%;">
+                      <canvas id="myChart2" style="overflow-x: scroll;"></canvas>
+                  </div>  
+  
+                  </div>
+                  </div>
+
+
+                  <div class="row" >
+                    <div class="col-md-4">
+                      <div class="container" id="weighmachine">
+                        <div class="wrapper">
+                          <div class="gauge">
+                            <div class="slice-colors">
+                              <div class="st slice-item"></div>
+                              <div class="st slice-item"></div>
+                              <div class="st slice-item"></div>
+                            </div>
+                            <div id="arrow3" class="needle"></div>
+                            <div class="gauge-center"><div id="counter3">0</div></div>
+                          </div>
+                        </div>                  
+                        </div>
+                        <div class="heading_container heading_center" style="color: black;">
+                          <h3>
+                            Battery Temperature
+                          </h3>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-8">
+                      <div style="width: 100%;">
+                        <canvas id="myChart3" style="overflow-x: scroll;"></canvas>
+                    </div>  
+    
+                    </div>
+                    </div>
+
+                    <div class="row" >
+                      <div class="col-md-4">
+                        <div class="container" id="weighmachine">
+                          <div class="wrapper">
+                            <div class="gauge">
+                              <div class="slice-colors">
+                                <div class="st slice-item"></div>
+                                <div class="st slice-item"></div>
+                                <div class="st slice-item"></div>
+                              </div>
+                              <div id="arrow4" class="needle"></div>
+                              <div class="gauge-center"><div id="counter4">0</div></div>
+                            </div>
+                          </div>                  
+                          </div>
+                          <div class="heading_container heading_center" style="color: black;">
+                            <h3>
+                              Smoke Level
+                            </h3>
+                          </div>
+                      </div>
+      
+                      <div class="col-md-8">
+                        <div style="width: 100%;">
+                          <canvas id="myChart4" style="overflow-x: scroll;"></canvas>
+                      </div>  
+                      </div>
+                      </div>
+
+                      <div class="row" >
+                        <div class="col-md-4">
+                          <div class="container" id="weighmachine">
+                            <div class="wrapper">
+                              <div class="gauge">
+                                <div class="slice-colors">
+                                  <div class="st slice-item"></div>
+                                  <div class="st slice-item"></div>
+                                  <div class="st slice-item"></div>
+                                </div>
+                                <div id="arrow5" class="needle"></div>
+                                <div class="gauge-center"><div id="counter5">0</div></div>
+                              </div>
+                            </div>                  
+                            </div>
+                            <div class="heading_container heading_center" style="color: black;">
+                              <h3>
+                                Vibration
+                              </h3>
+                            </div>
+                        </div>
+        
+                        <div class="col-md-8">
+                          <div style="width: 100%;">
+                            <canvas id="myChart5" style="overflow-x: scroll;"></canvas>
+                        </div>  
+                          </div>
+                        </div>
+
+
+                        <div class="row" >
+                          <div class="col-md-4">
+                            <div class="container" id="weighmachine">
+                              <div class="wrapper">
+                                <div class="gauge">
+                                  <div class="slice-colors">
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                    <div class="st slice-item"></div>
+                                  </div>
+                                  <div id="arrow5" class="needle"></div>
+                                  <div class="gauge-center"><div id="counter6">0</div></div>
+                                </div>
+                              </div>                  
+                              </div>
+                              <div class="heading_container heading_center" style="color: black;">
+                                <h3>
+                                  Oil Level
+                                </h3>
+                              </div>
+                          </div>
+          
+                          <div class="col-md-8">
+                            <div style="width: 100%;">
+                              <canvas id="myChart6" style="overflow-x: scroll;"></canvas>
+                          </div>  
+                            </div>
+                          </div>
+
+                </div>
+
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end contact section -->
+
+
+  <script src="http://127.0.0.1:5000/static/js/jquery-3.4.1.min.js"></script>
+  <script src="http://127.0.0.1:5000/static/js/bootstrap.js"></script>
+  <script src="http://127.0.0.1:5000/static/js/custom.js"></script>
+  <script>
+    $(document).ready(function() {
+        setInterval(function() {
+          $.ajax({
+                url: '/enginetemp',
+                success: function(res) {
+                    let item = document.getElementById('ph');
+                    $('#counter0').text(res[1][0]);
+                    $('#arrow1').css({"transform":'rotate('+res[1][0]+'deg)'});
+                            const ctx = document.getElementById('myChart0').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: res[0],
+                                    datasets: [{
+                                        label: 'enginetemp',
+                                        data: res[1],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        x: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            }
+                            )
+                        },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+            $.ajax({
+                url: '/voltage',
+                success: function(res) {
+                    let item = document.getElementById('ph');
+                    $('#counter1').text(res[1][0]);
+                    $('#arrow1').css({"transform":'rotate('+res[1][0]+'deg)'});
+                            const ctx = document.getElementById('myChart1').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: res[0],
+                                    datasets: [{
+                                        label: 'voltage',
+                                        data: res[1],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        x: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            }
+                            )
+                        },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+
+            $.ajax({
+                url: '/current',
+                success: function(res) {
+                    $('#counter2').text(res[1][0]);
+                    $('#arrow2').css({"transform":'rotate('+res[1][0]+'deg)'});
+                            const ctx = document.getElementById('myChart2').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: res[0],
+                                    datasets: [{
+                                        label: 'current',
+                                        data: res[1],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        x: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            }
+                            )
+                        },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: '/temp',
+                success: function(res) {
+                    $('#counter3').text(res[1][0]);
+                    $('#arrow3').css({"transform":'rotate('+res[1][0]+'deg)'});
+                            const ctx = document.getElementById('myChart3').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: res[0],
+                                    datasets: [{
+                                        label: 'Temperature',
+                                        data: res[1],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        x: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            }
+                            )
+                        },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: '/smoke',
+                success: function(res) {
+                    $('#counter4').text(res[1][0]);
+                    $('#arrow4').css({"transform":'rotate('+res[1][0]+'deg)'});
+                            const ctx = document.getElementById('myChart4').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: res[0],
+                                    datasets: [{
+                                        label: 'Smoke',
+                                        data: res[1],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        x: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            }
+                            )
+                        },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+            $.ajax({
+                url: '/vibration',
+                success: function(res) {
+                    $('#counter5').text(res[1][0]);
+                    $('#arrow5').css({"transform":'rotate('+res[1][0]+'deg)'});
+                            const ctx = document.getElementById('myChart5').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: res[0],
+                                    datasets: [{
+                                        label: 'vibration',
+                                        data: res[1],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        x: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            }
+                            )
+                        },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+
+            $.ajax({
+                url: '/oillevel',
+                success: function(res) {
+                    $('#counter6').text(res[1][0]);
+                    $('#arrow5').css({"transform":'rotate('+res[1][0]+'deg)'});
+                            const ctx = document.getElementById('myChart6').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: res[0],
+                                    datasets: [{
+                                        label: 'oillevel',
+                                        data: res[1],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)'
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)'
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        x: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            }
+                            )
+                        },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                }
+            });
+
+        }, 500); // Refresh every 5 seconds
+    });
+</script>
+</body>
+
+</html>
