@@ -67,11 +67,11 @@ Key Features
 
 🧱 System Block Diagram
 
-![Block Diagram](assets/block_diagram.png)
+![Block Diagram](assets/block_diagram.jpeg)
 
-🖥️ Web Dashboard Preview
+🖥️ Web Preview
 
-![Web Preview](assets/web_preview.png)
+![Web Preview](assets/web_preview.jpeg)
 
 Getting Started
 ---------------
