@@ -63,16 +63,6 @@ Key Features
 - Dashboard interface for visualization
 - Battery Management System (BMS) prediction
 
-📷 Visual Overview
-
-🧱 System Block Diagram
-
-![Block Diagram](assets/block_diagram.jpeg)
-
-🖥️ Web Preview
-
-![Web Preview](assets/web_preview.jpeg)
-
 Getting Started
 ---------------
 1. Clone the Repository:
