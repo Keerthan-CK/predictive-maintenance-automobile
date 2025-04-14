@@ -66,7 +66,7 @@ Key Features
 Getting Started
 ---------------
 1. Clone the Repository:
-   git clone https://github.com/your-username/predictive-maintenance-automobile.git
+   git clone https://github.com/Keerthan-CK/predictive-maintenance-automobile.git
 
 2. Setup Python Environment:
    pip install flask scikit-learn pandas sqlite3
@@ -81,4 +81,4 @@ Getting Started
 
 License
 -------
-This project is licensed under the MIT License.
+This project is licensed under the AIT License.
