@@ -79,29 +79,6 @@ Getting Started
 5. Access Web Interface:
    Open http://localhost:5000 in your browser
 
-Folder Structure
-----------------
-predictive-maintenance-automobile/
-├── esp32_code.ino
-├── templates/
-│   └── index.html
-├── static/
-│   ├── style.css
-│   └── script.js
-├── app.py
-├── model/
-│   └── random_forest.pkl
-├── database/
-│   └── vehicle_data.db
-└── README.txt
-
-Future Enhancements
--------------------
-- GPS-based fault reporting
-- Solar charging integration
-- Predictive analytics for oil and brakes
-- Mobile app interface
-
 License
 -------
 This project is licensed under the MIT License.
