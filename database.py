@@ -3,8 +3,8 @@ import time
 import sqlite3
 import datetime
 import telepot 
-bot=telepot.Bot("7627300344:AAFIyy5mIo0YD25Btzf5h5URJcRXO9Zzldk")
-ch_id="7716182006"
+bot=telepot.Bot("")
+ch_id=""
 connection = sqlite3.connect('database.db')
 cursor = connection.cursor()
 
