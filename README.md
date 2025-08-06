@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img alt="badge-license" src="https://img.shields.io/badge/license-MIT-blue.svg" />
+  <img alt="badge-license" src="https://img.shields.io/badge/license-AIT-blue.svg" />
   <img alt="badge-python" src="https://img.shields.io/badge/python-%3E%3D3.8-blue" />
   <img alt="badge-flask" src="https://img.shields.io/badge/flask-★-orange" />
   <img alt="badge-sqlite" src="https://img.shields.io/badge/database-SQLite-lightgrey" />
@@ -63,13 +63,23 @@ Predictive Maintenance for Automobiles combines **ESP32-based sensor telemetry**
 ## 🖼️ Visuals & Diagrams
 
 <p align="center">
-  <img src="assets/web_preview.jpeg" alt="Web Dashboard Preview" width="720" style="max-width:100%;"/><br>
-  <em>Figure — Web dashboard preview</em>
+  <img src="assets/pdm1.webp" alt="Web Dashboard Preview" width="720" style="max-width:100%;"/><br>
+  <em>Figure — Web dashboard preview_1</em>
 </p>
 
 <p align="center">
-  <img src="assets/block_diagram.jpg" alt="Block Diagram" width="720" style="max-width:100%;"/><br>
+  <img src="assets/pdm2.webp" alt="Web Dashboard Preview" width="720" style="max-width:100%;"/><br>
+  <em>Figure — Web dashboard preview_2</em>
+</p>
+
+<p align="center">
+  <img src="assets/block_diagram.jpeg" alt="Block Diagram" width="720" style="max-width:100%;"/><br>
   <em>Figure — System block diagram</em>
+</p>
+
+<p align="center">
+  <img src="assets/overview.png" alt="Overview" width="720" style="max-width:100%;"/><br>
+  <em>Figure — Working Overview</em>
 </p>
 
 <p align="center">
@@ -78,13 +88,18 @@ Predictive Maintenance for Automobiles combines **ESP32-based sensor telemetry**
 </p>
 
 <p align="center">
-  <img src="assets/analytics.jpeg" alt="Analytics Screens" width="720" style="max-width:100%;"/><br>
+  <img src="assets/pdm3.webp" alt="Analytics Screens" width="720" style="max-width:100%;"/><br>
+  <em>Figure — Analytics and visualizations</em>
+</p>
+
+<p align="center">
+  <img src="assets/pdm4.webp" alt="Analytics Screens" width="720" style="max-width:100%;"/><br>
   <em>Figure — Analytics and visualizations</em>
 </p>
 
 <p align="center">
   <img src="assets/bot_alerts.jpeg" alt="Telegram Alerts" width="720" style="max-width:100%;"/><br>
-  <em>Figure — Telegram bot alert samples</em>
+  <em>Figure — Telegram bot alert</em>
 </p>
 
 ---
