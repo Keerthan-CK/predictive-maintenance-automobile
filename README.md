@@ -18,7 +18,7 @@
 
 ## 🧭 Project Overview
 
-Predictive Maintenance for Automobiles combines **ESP32-based sensor telemetry**, **embedded firmware**, a **Flask** web dashboard, and a **Random Forest** ML model to predict vehicle faults, battery degradation, and remaining useful life (RUL). The system supports local alerts (LCD + buzzer) and remote alerts via a Telegram bot. :contentReference[oaicite:5]{index=5}
+Predictive Maintenance for Automobiles combines **ESP32-based sensor telemetry**, **embedded firmware**, a **Flask** web dashboard, and a **Random Forest** ML model to predict vehicle faults, battery degradation, and remaining useful life (RUL). The system supports local alerts (LCD + buzzer) and remote alerts via a Telegram bot.
 
 ---
 
