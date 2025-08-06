@@ -1,0 +1,303 @@
+#include <LiquidCrystal.h>
+const int rs=13,en=12,d4=14,d5=27,d6=26,d7=25;
+LiquidCrystal lcd(13,12,14,27,26,25);
+
+#include <DHT.h>
+#define dhtpin 5
+#define dhttype DHT11
+DHT dht (dhtpin, dhttype);
+
+// Pin definitions
+const int voltagePin = 34;  // Pin for voltage measurement
+const int currentPin = 39;  // Pin for ACS712 current sensor
+
+// Calibration constants for series battery connection
+const float voltageDividerRatio = 4.6; // Adjust based on your new resistor values (e.g., R1 = 10kΩ, R2 = 2kΩ)
+const float referenceVoltage = 3.3;    // ESP32 reference voltage (3.3V)
+const int adcResolution = 4095;        // 12-bit ADC resolution for ESP32
+// ACS712 constants (for current sensor)
+const float sensitivity = 0.185;       // ACS712 5A version sensitivity in V/A
+
+float voltage,current,val;
+
+#include <OneWire.h>
+#include <DallasTemperature.h>
+#define ONE_WIRE_BUS 4  
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensors(&oneWire);
+float temperature,t;
+
+int vibration,smokeval;
+int vib=19;
+int buzzer=32;
+
+char tempStr[8];
+
+#include <Wire.h>
+#include <Adafruit_Sensor.h> 
+#include <Adafruit_ADXL345_U.h>
+Adafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified();
+int oillevel;
+
+int echo_pin=15;
+int trigger=18;
+
+void setup() 
+{
+  Serial.begin(9600);
+  lcd.begin(16,2);
+  lcd.clear();
+  pinMode(voltagePin, INPUT);
+  pinMode(currentPin, INPUT);
+  pinMode(trigger,OUTPUT);
+  pinMode(echo_pin,INPUT);
+  pinMode(vib,INPUT);
+  pinMode(buzzer,OUTPUT);
+  Serial.println("Predective Maintainence");
+  lcd.setCursor(0,0);
+  lcd.print("  Predictive ");
+  lcd.setCursor(0,1);
+  lcd.print("  Maintainence   ");
+  delay(3000);
+   dht.begin();//Initialize serial
+  
+  delay(2000);
+
+  if(!accel.begin())
+{
+
+      Serial.println("No valid sensor found");
+
+      while(1);
+
+   }  
+}
+
+
+
+  
+ 
+
+
+ 
+void loop()
+{
+      humidity_check();
+      VOLTAGE_CURRENT();
+      SMOKE();
+      Temp_Reading();
+      VIBRATION_CHECK();
+      ADXL();
+      OIL_LEVEL();
+      Serial.println(String(t)+","+String(voltage)+","+String(current)+","+String(temperature)+","+String(smokeval)+","+String(vibration)+","+String(oillevel));
+    delay(2000);
+
+    if(Serial.available()>0)
+    {
+      char ch=Serial.read();
+      if(ch=='A')
+      {
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("Fault in ");
+        lcd.setCursor(0,1);
+        lcd.print("  car  ");
+        digitalWrite(buzzer,HIGH);
+        delay(1000);
+        digitalWrite(buzzer,LOW);
+        delay(1000);
+        
+      }
+    }
+}
+
+void OIL_LEVEL()
+{
+  digitalWrite(trigger,LOW);
+  delayMicroseconds(5);
+  digitalWrite(trigger,HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigger,HIGH);
+  int distance=pulseIn(echo_pin,HIGH);
+  oillevel=distance*0.034/2;
+//  Serial.print(": ");
+//  Serial.println(dist);
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Oil:");
+  lcd.setCursor(6,0);
+  lcd.print(oillevel);
+  delay(800);
+  if(oillevel>14)
+  {
+    Serial.println("Oil Level Low");
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Low oil");
+    digitalWrite(buzzer,HIGH);
+    delay(1500);
+    digitalWrite(buzzer,LOW);
+    delay(1500);
+  }
+}
+void humidity_check()
+{
+
+    t=dht.readTemperature();
+//    p=dht.readHumidity();
+
+//    Serial.print("Engine Temp: ");
+//    Serial.print(t);
+//    Serial.print("\xC2\xB0");
+//    Serial.print("C");
+//    
+
+     lcd.clear();
+     
+     lcd.setCursor(0,0);
+     lcd.print("Engine Temp:");
+     lcd.setCursor(0,1);
+     lcd.print(t);
+     delay(1000);
+      dtostrf(t, 5, 3, tempStr);
+     
+}
+
+void VOLTAGE_CURRENT()
+{
+    int voltageReading = analogRead(voltagePin);
+  voltage = (voltageReading * referenceVoltage / adcResolution) * voltageDividerRatio;
+  
+  // Current reading from ACS712
+  int currentReading = analogRead(currentPin);
+  float currentVoltage = (currentReading * referenceVoltage / adcResolution);
+  current = (currentVoltage - referenceVoltage / 2) / sensitivity; // Calculate current in Amps
+
+//  // Display voltage and current values
+//  Serial.print("Voltage: ");
+//  Serial.print(voltage);
+//  Serial.println(" V");
+//  
+//  Serial.print("Current: ");
+//  Serial.print(current);
+//  Serial.println(" A");
+
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Voltage:");
+  lcd.setCursor(9,0);
+  lcd.print(voltage);
+  lcd.setCursor(14,0);
+  lcd.print("V");
+  lcd.setCursor(0,1);
+  lcd.print("Current:");
+  lcd.setCursor(8,1);
+  lcd.print(current);
+  lcd.setCursor(12,1);
+  lcd.print("A");
+  
+  
+  // Delay before next reading
+  delay(1500);
+}
+
+void Temp_Reading()
+{
+   
+     sensors.requestTemperatures(); 
+      temperature = sensors.getTempCByIndex(0);
+//      Serial.print("Temperature: ");
+//      Serial.println(temperature);
+      lcd.clear();
+      lcd.print("Temperature: ");
+      lcd.setCursor(0,1);
+      lcd.print(temperature);
+      delay(1000);
+      if(temperature>35)
+      {
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("More Battery");
+        lcd.setCursor(0,1);
+        lcd.print("Temp Detected");
+        delay(1500);
+      
+}
+}
+
+void SMOKE()
+{
+  smokeval=analogRead(36);
+//  Serial.println("Smoke:"+String(smokeval));
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Smoke:"+String(smokeval));
+  delay(1000);
+  if(smokeval>200)
+  {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Smoke detected");
+    delay(1000);
+  }
+}
+
+void VIBRATION_CHECK()
+{
+  vibration=digitalRead(vib);
+//  Serial.println("Vib:"+String(vibration));
+  lcd.clear();
+  lcd.setCursor(0,0);
+  lcd.print("Vib:"+String(vibration));
+  delay(1000);
+  if(vib==LOW)
+  {
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Vibration");
+    lcd.setCursor(0,1);
+    lcd.print("Detected");
+    delay(1000);
+  }
+}
+
+void ADXL()
+{
+  sensors_event_t event; 
+
+   accel.getEvent(&event);
+
+  float X_val=event.acceleration.x;
+
+  float Y_val=event.acceleration.y;
+
+  float Z_val=event.acceleration.z;
+   
+
+//   Serial.print("X: "); Serial.print(event.acceleration.x); Serial.print("  ");
+////
+//   Serial.print("Y: "); Serial.print(event.acceleration.y); Serial.print("  ");
+////
+//   Serial.print("Z: "); Serial.print(event.acceleration.z); Serial.print("  ");
+//
+//   Serial.println("m/s^2 ");
+    delay(500);
+
+   
+   
+   
+   
+   
+   
+   if((X_val<-7.50)||(X_val>7.5)||(Y_val>7.5)||(Y_val<-7.50))
+   {
+    
+//    Serial.println("$Accident Occured#");
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("Accident Occured");
+    delay(1000);
+
+   }
+   
+}
